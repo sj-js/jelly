@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<HTML>
+    <head>
+        <meta charset="utf-8" />
+        <meta name=viewport content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no" />
+        <!-- Library - SJJS -->
+        <script src="../../crossman/src/js/crossman.js"></script>
+        <script src="../../storageman/src/js/storageman.js"></script>
+        <script src="../../keyman/src/js/keyman.js"></script>
+        <script src="../../boxman/src/js/boxman.js"></script>
+    e    <script src="../../popman/src/js/popman.js"></script>
+        <script src="../../menuman/src/js/menuman.js"></script>
+        <script src="../../variableman/src/js/variableman.js"></script>
+
+<!--        <link href="../../favicon_jmeetsz.ico" rel="shortcut icon" type="image/x-icon" />-->
+        <link href="../favicon_jelly.ico" rel="shortcut icon" type="image/x-icon" />
+
+        <!-- Library - SJJS-Jelly -->
+        <link href="../src/css/jelly.css" rel="stylesheet" type="text/css"/>
+        <link href="../src/css/jelly-plugin-icon-manager.css" rel="stylesheet" type="text/css"/>
+        <link href="../src/css/jelly-plugin-stats.css" rel="stylesheet" type="text/css"/>
+
+        <script src="../src/js/jelly.js"></script>
+        <script src="../src/js/jelly-model.js"></script>
+        <script src="../src/js/jelly-icon.js"></script>
+        <script src="../src/js/runner/jelly-runner-key.js"></script>
+        <script src="../src/js/runner/jelly-runner-speech.js"></script>
+        <script src="../src/js/runner/jelly-runner-schedule.js"></script>
+        <script src="../src/js/plugin/jelly-plugin-stats.js"></script>
+        <script src="../src/js/plugin/jelly-plugin-icon-manager.js"></script>
+        <script src="../src/js/plugin/jelly-plugin-icon-manager-inputer.js"></script>
+        <script src="../src/js/plugin/jelly-plugin-alarm-manager.js"></script>
+        <script src="../src/js/plugin/jelly-plugin-db-manager.js"></script>
+        <script src="../src/js/plugin/jelly-plugin-xhr-manager.js"></script>
+        <script src="../src/js/plugin/jelly-plugin-command-search-test.js"></script>
+        <script src="../src/js/plugin/jelly-plugin-word-chain.js"></script>
+        <script>
+            var jelly = new Jelly();
+        </script>
+
+    </head>
+
+    <style>
+        .test1 { display:block; height:50px; border:2px solid black; margin-bottom:200px; }
+    </style>
+
+    <script>
+        var jelly = new Jelly({modeNeedsToCallName: true, validTimeToCommand: 4000, storagePath: '/jelly/icon'})
+            .addPlugin([
+                new Jelly.PluginStats(),
+                new Jelly.PluginCommandSearchTest('search', '검색'),
+                // new Jelly.PluginAlarmManager(),
+                // new JellySpeaker.PluginWordChain(),
+                // new JellySpeaker.PluginDBManager(),
+                // new Jelly.PluginXHRManager(),
+                new Jelly.PluginIconManager()
+                    // .setHandler(function(icon){
+                    //     icon.setRunner([
+                    //         new Jelly.SpeechRunner('${parameter.except(이라고).except(라고)} 검색'),
+                    //         new Jelly.KeyRunner([[KeyMan.SHIFT], [KeyMan.SHIFT]]),
+                    //     ]);
+                    // }),
+                    ,
+                new Jelly.PluginIconManagerInputer()
+                    .setLoadData(function(){
+                        return { hi: {id:'test', type:'click'},  hello: {id:'test2', type:'click'}, };
+                    }),
+            ])
+            .setupSystemIcon([
+                new Jelly.Icon('search').setCommand(function(parameter){
+                    searchWithParameterURL(parameter.keyword); //없으면 자동으로 Input의 Value 채취
+                }),
+                new Jelly.Icon('search-on-naver').setCommand(function(parameter){
+                    window.open("https://search.naver.com/search.naver?ie=UTF-8&query=" +parameter, "_blank");
+                }),
+                new Jelly.Icon('search-on-google').setCommand(function(parameter){
+                    window.open("https://www.google.com/search?q=" +parameter, "_blank");
+                }),
+                new Jelly.Icon('show').setCommand(function(parameter){
+                    // run('show', parameter);
+                }),
+                new Jelly.Icon('open').setCommand(function(parameter){
+                    window.open('https://naver.com', '_blank');
+                }),
+                // new Jelly.Icon('move-to-home').setCommand(function(parameter){
+                //     location.href = SEARCHER.URL_TO_HOME;
+                // }),
+                // new Jelly.Icon('open-user-manager').setCommand(function(parameter){
+                //     openUserManager();
+                // }),
+                new Jelly.Icon().setCommand('search').setRunner([
+                    new Jelly.SpeechRunner('${parameter.except(이라고).except(라고)} 검색'),
+                    new Jelly.SpeechRunner(new RegExp('\\w+ 검색')),
+                ]),
+                new Jelly.Icon().setCommand('search-on-naver').setRunner([
+                    new Jelly.SpeechRunner('${parameter.except(이라고).except(라고)} 네이버에서 검색'),
+                    new Jelly.SpeechRunner(new RegExp('.+ 검색')),
+                ]),
+            ])
+            .setupUserIcon([
+                /** 데이터 보조 **/
+                new Jelly.Icon('user-manager').setTitle('사용자 관리자').setHTML('🧍').setCommand('open-user-manager').setRunner([
+                    new Jelly.KeyRunner([KeyMan.ALT, KeyMan.N2]),
+                ]),
+                new Jelly.Icon('team-manager').setTitle('소속 관리자').setHTML('👨‍👩‍👧 ').setCommand('open-team-manager').setRunner([
+                    new Jelly.KeyRunner([KeyMan.ALT, KeyMan.N9]),
+                ]),
+                new Jelly.Icon('category-manager').setTitle('카테고리 관리자').setHTML('🗂️').setCommand('open-category-manager').setRunner([
+                    new Jelly.KeyRunner([KeyMan.ALT, KeyMan.N3]),
+                ]),
+                new Jelly.Icon('product-manager').setTitle('상품 관리자').setHTML('📦').setCommand('open-product-manager').setRunner([
+                    new Jelly.KeyRunner([KeyMan.ALT, KeyMan.N4]),
+                ]),
+                new Jelly.Icon('index-manager').setTitle('인덱스 관리자').setHTML('🕵️‍♂️').setCommand('open-index-manager').setRunner([
+                    new Jelly.KeyRunner([KeyMan.ALT, KeyMan.N6]),
+                ]),
+
+                /** 관제 **/
+                new Jelly.Icon('page-gitlab').setTitle('GitLab').setHTML('🦊').setURL('http://192.168.0.18'),
+                new Jelly.Icon('page-jelly').setTitle('Jelly').setHTML('Jelly').setURL('http://192.168.0.18:8080/jelly'),
+                new Jelly.Icon('page-ealsticsearch').setTitle('ElasticSearch').setHTML('ES').setURL('http://192.168.0.18:9200'),
+                new Jelly.Icon('page-kibana').setTitle('Kibana').setHTML('Kibana').setURL('http://192.168.0.18:5601'),
+                new Jelly.Icon('page-logstash').setTitle('Logstash').setHTML('Logstash').setURL('http://192.168.0.18:9600'),
+                // new JellySpeaker.Icon('page-tibero').setTitle('Tibero').setHTML('Tibero').setURL('jdbc:tibero:thin:@192.168.0.18:8629:tibero').setData({username:'nia', password:'nia'}),
+                // new Jelly.Icon('page-postgres').setTitle('Postgres').setHTML('Postgres').setURL('jdbc:postgresql://192.168.0.18:5432/postgres').setData({username:'postgres', password:'postgres'}),
+
+                /** 기능들 **/
+                new Jelly.Icon('schedule-001').setTitle('주기적으로 Data Count 가져와').setHTML('🔢')
+                    .setCommand(function(data){
+                        // loadCount()
+                    })
+                    .setRunner([
+                        new Jelly.ScheduleRunner(30 * 1000)
+                    ]),
+                // new JellySpeaker.Icon('testing').setTitle('testing').setHTML('🔢').setCommand(function(){ console.error(new Date().getTime()) }).setRunner([
+                //     new JellySpeaker.ScheduleRunner('{dayOfWeek(일), cycle(23:45, 23:46, 23:50, 23:55, 00:37, 00:42)}, {dayOfWeek(월,화), cycle(2m)}')
+                // ]),
+                // new Jelly.Icon('button-002').setTitle('학습해봐!').setHTML('👩‍🎓').setCommand(function(){ testLearn() }).setRunner([
+                //     new Jelly.SpeechRunner('학습 해 봐'),
+                // ]),
+                // new Jelly.Icon('toggle-memory-watcher').setTitle('메모리 감시자').setHTML('📉').setClass(Jelly.PluginIconManager.CLASS_ICON_TOGGLE)
+                //     .setCommand(function(parameter, resolve){
+                //         parameter.status ? stopMemoryWatcher(resolve) : startMemoryWatcher(resolve);
+                //     })
+                //     .setModeStatusCheck(true, function(resolve){
+                //         // checkMemoryWatcher(function(result){ resolve(result); });
+                //     }),
+            ])
+            .loadIcon()
+            .detect()
+            .start();
+    </script>
+
+    <body>
+        <div>
+            Hi! Hello!
+        </div>
+        <button id="jelly-button-setup" class="jelly-button button-style-3" data-preview="설정" data-jelly-click="open-plugin-icon-manager">
+            <div class="ani-spin">⚙️</div>
+        </button>
+
+        <div class="test1">Please scroll down.</div>
+        <div class="test1" style="width:500px; background:#FFFFFF;" data-fixed>
+            <span style="font-size:30px">안녕?</span>
+            <input type="text" value="Some Text">
+            <button onclick="alert('Testing');">🔎</button>
+            <button onclick="window.scrollTo({top:0, behavior:'smooth'});">🔝</button>
+        </div>
+        <div class="test1" style="width:250px; background:pink;">Hello?</div>
+        <div class="test1" style="width:200px; background:skyblue;">Annyeong?</div>
+        <div class="test1" style="width:300px; background:gold;">Konnichiwa? and Nihao? or Hola?</div>
+        <div class="test1" style="width:500px; background:forestgreen;">How are you?</div>
+        <div class="test1" style="width:800px; background:chocolate;">Como esta?</div>
+
+
+    </body>
+
+
+
+
+
+</HTML>

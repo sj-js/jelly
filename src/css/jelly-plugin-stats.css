@@ -1,0 +1,17 @@
+
+/*****
+ * Stats
+ *****/
+div[data-pop]#pop-stats {
+    background: rgba(255,255,255,0.9);
+    border: 2px dashed black;
+    border-radius: 5px;
+}
+
+.jelly-speak-analysis-expression-confidence-10{
+    background: pink;
+}
+
+.jelly-speak-analysis-expression-confidence-5{
+    background: #ffeaea;
+}

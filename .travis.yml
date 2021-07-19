@@ -1,0 +1,69 @@
+##################################################
+#
+# Environment
+#
+##################################################
+language: node_js
+node_js: 11.10.0
+os:
+  - linux
+
+
+
+##################################################
+#
+# SCRIPT
+#
+##################################################
+before_script:
+  - npm install -g gulp
+  - npm install
+script: gulp
+
+
+##################################################
+#
+# CACHE
+#
+##################################################
+cache:
+  directories:
+    - "node_modules"
+
+
+##################################################
+#
+# DEPLOY
+#
+##################################################
+before_deploy:
+  - npm install
+  - pwd
+  - ls dist/js/
+deploy:
+  - provider: releases
+    edge: true
+    api_key:
+      secure: ""
+    file:
+      - dist/js/jelly.min.js
+      - dist/css/jelly.min.css
+    on:
+      repo: sj-js/jelly
+      branch: master
+  - provider: npm
+    edge: true
+    email: "$NPM_EMAIL"
+    api_key: "$NPM_API_TOKEN"
+    on:
+      branch: master
+
+
+
+##################################################
+#
+# SUCCESS
+#
+##################################################
+after_success:
+  - npm run coveralls

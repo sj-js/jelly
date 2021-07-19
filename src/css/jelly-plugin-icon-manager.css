@@ -1,0 +1,86 @@
+
+div[data-pop]#pop-icon-manager input:focus {
+    outline: none;
+}
+
+div[data-pop]#pop-icon-manager #input-dev-search-all {
+    margin-top: 5px;
+}
+
+div[data-pop]#pop-icon-manager > div[data-box] > div[data-obj].jelly-plugin-icon-manager-default {
+    cursor: pointer;
+}
+
+div[data-pop]#pop-icon-manager > div[data-box] > div[data-obj].jelly-plugin-icon-manager-default:hover {
+    border-color: #00adf6;
+}
+
+
+
+
+/**************************************************
+ * ICON
+ **************************************************/
+div[data-obj].jelly-plugin-icon-manager-default {
+    border-width: 5px;
+    border-style: solid;
+    border-radius: 10px;
+    background: white;
+    margin: 2px;
+    font-weight: bold;
+    transition: 1s;
+}
+div[data-obj].jelly-plugin-icon-manager-default.jelly-icon-status-on{
+    border: 5px solid #8fd085;
+    background: #c5e2be;
+}
+div[data-obj].jelly-plugin-icon-manager-default.jelly-icon-status-off{
+    border: 5px solid #cd898d;
+    background: #eed6d2;
+}
+div[data-obj].jelly-plugin-icon-manager-default.jelly-icon-status-pending{
+    border: 5px dashed #0b160f;
+    background: #c3c4c3;
+    opacity: 0.1;
+}
+
+
+div[data-obj].jelly-plugin-icon-manager-toggle {
+    border: 5px dot-dot-dash;
+    margin: 2px;
+    font-weight: bold;
+}
+div[data-obj].jelly-plugin-icon-manager-toggle.jelly-icon-status-on{
+    border: 5px dot-dot-dash #8fd085;
+    border-radius: 0px 0px 0px 100px;
+    background: #c5e2be;
+}
+div[data-obj].jelly-plugin-icon-manager-toggle.jelly-icon-status-on:hover{
+    border-radius: 30px 30px 30px 30px;
+    background: #605252;
+}
+div[data-obj].jelly-plugin-icon-manager-toggle.jelly-icon-status-off{
+    border: 5px dot-dot-dash #3c3234;
+    border-radius: 30px 30px 30px 30px;
+    background: #665856;
+}
+div[data-obj].jelly-plugin-icon-manager-toggle.jelly-icon-status-off:hover{
+    border-radius: 0px 0px 0px 100px;
+    background: #586651;
+}
+div[data-obj].jelly-plugin-icon-manager-toggle.jelly-icon-status-pending{
+    border: 5px dashed #0b160f;
+    background: #c3c4c3;
+    opacity: 0.1;
+}
+
+
+
+.jelly-icon-enabled {
+    border:2px solid greenyellow;
+}
+
+.jelly-icon-disabled {
+    border:2px dot-dash gray;
+    opacity:0.3;
+}
