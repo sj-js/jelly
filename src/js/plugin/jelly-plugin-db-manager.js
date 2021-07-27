@@ -1,4 +1,16 @@
 /***************************************************************************
+ * [Node.js] import
+ ***************************************************************************/
+try{
+    var crossman = require('@sj-js/crossman');
+    var ready = crossman.ready,
+        getClazz = crossman.getClazz,
+        getData = crossman.getData,
+        SjEvent = crossman.SjEvent
+    ;
+}catch(e){}
+
+/***************************************************************************
  *
  * Jelly - Command Listener
  *

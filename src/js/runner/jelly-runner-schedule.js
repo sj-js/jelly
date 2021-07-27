@@ -1,3 +1,15 @@
+/***************************************************************************
+ * [Node.js] import
+ ***************************************************************************/
+try{
+    var crossman = require('@sj-js/crossman');
+    var ready = crossman.ready,
+        getClazz = crossman.getClazz,
+        getData = crossman.getData,
+        SjEvent = crossman.SjEvent
+    ;
+}catch(e){}
+
 /**************************************************
  *
  * RUNNER - schedule
@@ -15,6 +27,8 @@ Jelly.ScheduleRunner = function(object){
     }
     // this.init(object);
 };
+
+
 Jelly.ScheduleRunner.prototype.init = function(object){
     for (var key in object)
         this[key]= object[key];

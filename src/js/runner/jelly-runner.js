@@ -20,7 +20,7 @@ try{
  * RUNNER - key
  *
  **************************************************/
-Jelly.KeyRunner = function(object){
+Jelly.Runner = getClazz(function(object){
     this.type = Jelly.TYPE_RUNNER_KEY;
     this.parent = null;
     this.keyList = null;
@@ -34,8 +34,9 @@ Jelly.KeyRunner = function(object){
 
     this.keyList = KeyMan.parse(object);
     // this.init(object);
-};
-
+})
+.extend(SjEvent)
+.returnFunction();
 
 Jelly.KeyRunner.prototype.init = function(object){
     for (var key in object)

@@ -1,6 +1,25 @@
-/**************************************************
+/***************************************************************************
+ * [Node.js] import
+ ***************************************************************************/
+try{
+    var crossman = require('@sj-js/crossman');
+    var ready = crossman.ready,
+        getClazz = crossman.getClazz,
+        getData = crossman.getData,
+        SjEvent = crossman.SjEvent
+    ;
+}catch(e){}
+
+
+/****************************************************************************************************
  *
  * MODEL
+ *
+ ****************************************************************************************************/
+
+/**************************************************
+ *
+ * SpeakProcess
  *
  **************************************************/
 Jelly.SpeakProcess = function(object){
@@ -15,7 +34,11 @@ Jelly.SpeakProcess.prototype.init = function(object){
 };
 
 
-
+/**************************************************
+ *
+ * SpeakResult
+ *
+ **************************************************/
 Jelly.SpeakResult = function(object){
     this.time = null;
     this.type = Jelly.SpeakResult.TYPE_SPEECH;
@@ -33,7 +56,11 @@ Jelly.SpeakResult.TYPE_SPEECH = 1;
 Jelly.SpeakResult.TYPE_TEXT = 2;
 
 
-
+/**************************************************
+ *
+ * JellyCommand
+ *
+ **************************************************/
 Jelly.JellyCommand = function(object){
     this.command;
     this.parameter;
