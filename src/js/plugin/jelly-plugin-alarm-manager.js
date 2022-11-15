@@ -3,6 +3,7 @@
  ***************************************************************************/
 try{
     var crossman = require('@sj-js/crossman');
+    var Jelly = require('../jelly');
     var ready = crossman.ready,
         getClazz = crossman.getClazz,
         getData = crossman.getData,

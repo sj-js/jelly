@@ -2,6 +2,8 @@
  * [Node.js] import
  ***************************************************************************/
 try{
+    var Jelly = require('../jelly');
+
     var crossman = require('@sj-js/crossman');
     var ready = crossman.ready,
         getClazz = crossman.getClazz,
@@ -9,6 +11,7 @@ try{
         SjEvent = crossman.SjEvent
     ;
 }catch(e){}
+
 
 /****************************************************************************************************
  *

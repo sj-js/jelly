@@ -3,6 +3,16 @@
  ***************************************************************************/
 try{
     var crossman = require('@sj-js/crossman');
+    var BoxMan = require('@sj-js/boxman');
+    var PopMan = require('@sj-js/popman');
+    var MenuMan = require('@sj-js/menuman');
+    var KeyMan = require('@sj-js/keyman');
+    require('@sj-js/keyman/src/js/keyhandler/keyman-keyhandler-shortcut');
+    require('@sj-js/keyman/src/js/keyhandler/keyman-keyhandler-command');
+    // var VariableMan = require('@sj-js/variableman');
+
+    var WorkItem = require('./model/work-item');
+
     var ready = crossman.ready,
         getClazz = crossman.getClazz,
         getData = crossman.getData,
@@ -23,7 +33,7 @@ Jelly = getClazz(function(object){
 
     this.speechRecognizer = null;
 
-    this.lastProcessResult = new Jelly.SpeakProcess();
+    // this.lastProcessResult = new Jelly.SpeakProcess();
 
     //Meta
     this.name = '젤리';
@@ -57,7 +67,7 @@ Jelly = getClazz(function(object){
     this.popman = new PopMan();
     this.keyman = new KeyMan().addKeyHandler([new KeyMan.ShortcutKeyHandler(), new KeyMan.CommandKeyHandler()]);
     this.menuman = new MenuMan();
-    this.variableman = new VariableMan();
+    // this.variableman = new VariableMan();
     this.pluginList = [];
 
     //Log
@@ -396,7 +406,7 @@ Jelly.prototype.getIcon = function(param){
 Jelly.prototype.getIcons = function(){
     return this.iconList;
 }
-BoxMan.prototype.getIconsByCondition = function(condition){
+Jelly.prototype.getIconsByCondition = function(condition){
     var resultList = [];
     var iconList = this.iconList;
     for (var boxName in iconList){

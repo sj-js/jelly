@@ -3,9 +3,13 @@
  ***************************************************************************/
 try{
     var crossman = require('@sj-js/crossman');
+    var KeyMan = require('@sj-js/keyman');
+    var Jelly = require('../jelly');
     var ready = crossman.ready,
         getClazz = crossman.getClazz,
         getData = crossman.getData,
+        newEl = crossman.newEl,
+        getEl = crossman.getEl,
         SjEvent = crossman.SjEvent
     ;
 }catch(e){}
