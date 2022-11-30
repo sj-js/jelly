@@ -1,3 +1,27 @@
+/***************************************************************************
+ * [Node.js] import
+ ***************************************************************************/
+try{
+    var crossman = require('@sj-js/crossman');
+    var KeyMan = require('@sj-js/keyman');
+    var BoxMan = require('@sj-js/boxman');
+    var MenuMan = require('@sj-js/menuman');
+    var Jelly = require('../jelly');
+    require('../runner/jelly-runner-speech');
+    require('../runner/jelly-runner-key');
+
+    var ready = crossman.ready,
+        getClazz = crossman.getClazz,
+        getData = crossman.getData,
+        getEl = crossman.getEl,
+        newEl = crossman.newEl,
+        SjEvent = crossman.SjEvent
+    ;
+
+    var WorkItem = require('../model/work-item');
+
+}catch(e){}
+
 /*****************************************************************************************************************************
  *
  * Jelly - Command Listener

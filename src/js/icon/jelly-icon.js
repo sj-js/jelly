@@ -1,10 +1,23 @@
+/***************************************************************************
+ * [Node.js] import
+ ***************************************************************************/
+try{
+    var crossman = require('@sj-js/crossman');
+    var Jelly = require('../jelly');
+    var ready = crossman.ready,
+        getClazz = crossman.getClazz,
+        getData = crossman.getData,
+        SjEvent = crossman.SjEvent
+    ;
+}catch(e){}
+
 /**************************************************
  *
  * ICON
  *
  **************************************************/
-Jelly.Icon = function(object){
-    this.event = new SjEvent();
+Jelly.Icon = getClazz(function(object){
+    SjEvent.apply(this, arguments);
 
     this.parent = null;
     this.modeVisible = true;
@@ -37,7 +50,10 @@ Jelly.Icon = function(object){
         }
     }
     this.setModeEnable(this.modeEnable);
-};
+})
+.extend(SjEvent)
+.returnFunction();
+
 Jelly.Icon.STATUS_OFF= 0;
 Jelly.Icon.STATUS_ON = 1;
 Jelly.Icon.STATUS_PENDING = 2;
@@ -52,16 +68,16 @@ Jelly.Icon.EVENT_CHANGESTATUS = 'changestatus';
  * EVENT
  *
  **************************************************/
-Jelly.Icon.prototype.addEventListener               = function(element, eventName, eventFunc){ return this.event.addEventListener(element, eventName, eventFunc); };
-Jelly.Icon.prototype.addEventListenerByEventName    = function(eventName, eventFunc){ this.event.addEventListenerByEventName(eventName, eventFunc); return this; };
-Jelly.Icon.prototype.hasEventListener               = function(element, eventName, eventFunc){ return this.event.hasEventListener(element, eventName, eventFunc); };
-Jelly.Icon.prototype.hasEventListenerByEventName    = function(eventName, eventFunc){ return this.event.hasEventListenerByEventName(eventName, eventFunc); };
-Jelly.Icon.prototype.hasEventListenerByEventFunc    = function(eventFunc){ return this.event.hasEventListenerByEventFunc(eventFunc); };
-Jelly.Icon.prototype.removeEventListener            = function(element, eventName, eventFunc){ return this.event.removeEventListener(element, eventName, eventFunc); };
-Jelly.Icon.prototype.removeEventListenerByEventName = function(eventName, eventFunc){ return this.event.removeEventListenerByEventName(eventName, eventFunc); };
-Jelly.Icon.prototype.removeEventListenerByEventFunc = function(eventFunc){ return this.event.removeEventListenerByEventFunc(eventFunc); };
-Jelly.Icon.prototype.execEventListener              = function(element, eventName, event){ return this.event.execEventListener(element, eventName, event); };
-Jelly.Icon.prototype.execEventListenerByEventName   = function(eventName, event){ return this.event.execEventListenerByEventName(eventName, event); };
+// Jelly.Icon.prototype.addEventListener               = function(element, eventName, eventFunc){ return this.event.addEventListener(element, eventName, eventFunc); };
+// Jelly.Icon.prototype.addEventListenerByEventName    = function(eventName, eventFunc){ this.event.addEventListenerByEventName(eventName, eventFunc); return this; };
+// Jelly.Icon.prototype.hasEventListener               = function(element, eventName, eventFunc){ return this.event.hasEventListener(element, eventName, eventFunc); };
+// Jelly.Icon.prototype.hasEventListenerByEventName    = function(eventName, eventFunc){ return this.event.hasEventListenerByEventName(eventName, eventFunc); };
+// Jelly.Icon.prototype.hasEventListenerByEventFunc    = function(eventFunc){ return this.event.hasEventListenerByEventFunc(eventFunc); };
+// Jelly.Icon.prototype.removeEventListener            = function(element, eventName, eventFunc){ return this.event.removeEventListener(element, eventName, eventFunc); };
+// Jelly.Icon.prototype.removeEventListenerByEventName = function(eventName, eventFunc){ return this.event.removeEventListenerByEventName(eventName, eventFunc); };
+// Jelly.Icon.prototype.removeEventListenerByEventFunc = function(eventFunc){ return this.event.removeEventListenerByEventFunc(eventFunc); };
+// Jelly.Icon.prototype.execEventListener              = function(element, eventName, event){ return this.event.execEventListener(element, eventName, event); };
+// Jelly.Icon.prototype.execEventListenerByEventName   = function(eventName, event){ return this.event.execEventListenerByEventName(eventName, event); };
 
 
 

@@ -1,13 +1,41 @@
 /***************************************************************************
+ * [Node.js] import
+ ***************************************************************************/
+try{
+    var crossman = require('@sj-js/crossman');
+    var BoxMan = require('@sj-js/boxman');
+    var PopMan = require('@sj-js/popman');
+    var MenuMan = require('@sj-js/menuman');
+    var KeyMan = require('@sj-js/keyman');
+
+    var WorkItem = require('./model/work-item');
+
+    require('@sj-js/keyman/src/js/keyhandler/keyman-keyhandler-shortcut');
+    require('@sj-js/keyman/src/js/keyhandler/keyman-keyhandler-command');
+    // var VariableMan = require('@sj-js/variableman');
+
+
+    var ready = crossman.ready,
+        getClazz = crossman.getClazz,
+        getData = crossman.getData,
+        SjEvent = crossman.SjEvent
+    ;
+}catch(e){}
+
+
+/***************************************************************************
  *
- * Jelly - Command Listener
+ * Jelly
+ *
+ *      - Command Listener
  *
  ***************************************************************************/
-function Jelly(object){
-    this.event = new SjEvent();
+Jelly = getClazz(function(object){
+    SjEvent.apply(this, arguments);
+
     this.speechRecognizer = null;
 
-    this.lastProcessResult = new Jelly.SpeakProcess();
+    // this.lastProcessResult = new Jelly.SpeakProcess();
 
     //Meta
     this.name = '젤리';
@@ -41,7 +69,7 @@ function Jelly(object){
     this.popman = new PopMan();
     this.keyman = new KeyMan().addKeyHandler([new KeyMan.ShortcutKeyHandler(), new KeyMan.CommandKeyHandler()]);
     this.menuman = new MenuMan();
-    this.variableman = new VariableMan();
+    // this.variableman = new VariableMan();
     this.pluginList = [];
 
     //Log
@@ -73,7 +101,20 @@ function Jelly(object){
             }
         }
     });
-}
+})
+.extend(SjEvent)
+.returnFunction();
+// getClazz(Jelly).extend(SjEvent);
+
+
+/***************************************************************************
+ * [Node.js] exports
+ ***************************************************************************/
+try {
+    module.exports = exports = Jelly;
+} catch (e) {}
+
+
 Jelly.TYPE_RUNNER_KEY = 'key';
 Jelly.TYPE_RUNNER_SPEECH = 'speech';
 Jelly.TYPE_RUNNER_SCHEDULE = 'schedule';
@@ -84,24 +125,6 @@ Jelly.EVENT_ENDSPEECH = 'endspeech';
 Jelly.EVENT_NOMORESPEECH = 'nomorespeech';
 Jelly.EVENT_STOPSPEECH = 'stopspeech';
 
-
-
-
-/**************************************************
- *
- * EVENT
- *
- **************************************************/
-Jelly.prototype.addEventListener               = function(element, eventName, eventFunc){ return this.event.addEventListener(element, eventName, eventFunc); };
-Jelly.prototype.addEventListenerByEventName    = function(eventName, eventFunc){ this.event.addEventListenerByEventName(eventName, eventFunc); return this; };
-Jelly.prototype.hasEventListener               = function(element, eventName, eventFunc){ return this.event.hasEventListener(element, eventName, eventFunc); };
-Jelly.prototype.hasEventListenerByEventName    = function(eventName, eventFunc){ return this.event.hasEventListenerByEventName(eventName, eventFunc); };
-Jelly.prototype.hasEventListenerByEventFunc    = function(eventFunc){ return this.event.hasEventListenerByEventFunc(eventFunc); };
-Jelly.prototype.removeEventListener            = function(element, eventName, eventFunc){ return this.event.removeEventListener(element, eventName, eventFunc); };
-Jelly.prototype.removeEventListenerByEventName = function(eventName, eventFunc){ return this.event.removeEventListenerByEventName(eventName, eventFunc); };
-Jelly.prototype.removeEventListenerByEventFunc = function(eventFunc){ return this.event.removeEventListenerByEventFunc(eventFunc); };
-Jelly.prototype.execEventListener              = function(element, eventName, event){ return this.event.execEventListener(element, eventName, event); };
-Jelly.prototype.execEventListenerByEventName   = function(eventName, event){ return this.event.execEventListenerByEventName(eventName, event); };
 
 
 
@@ -385,7 +408,7 @@ Jelly.prototype.getIcon = function(param){
 Jelly.prototype.getIcons = function(){
     return this.iconList;
 }
-BoxMan.prototype.getIconsByCondition = function(condition){
+Jelly.prototype.getIconsByCondition = function(condition){
     var resultList = [];
     var iconList = this.iconList;
     for (var boxName in iconList){

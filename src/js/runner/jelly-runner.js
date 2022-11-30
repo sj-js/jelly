@@ -5,7 +5,6 @@ try{
     var Jelly = require('../jelly');
 
     var crossman = require('@sj-js/crossman');
-    var KeyMan = require('@sj-js/keyman');
     var ready = crossman.ready,
         getClazz = crossman.getClazz,
         getData = crossman.getData,
@@ -24,7 +23,7 @@ try{
  * RUNNER - key
  *
  **************************************************/
-Jelly.KeyRunner = function(object){
+Jelly.Runner = getClazz(function(object){
     this.type = Jelly.TYPE_RUNNER_KEY;
     this.parent = null;
     this.keyList = null;
@@ -38,8 +37,9 @@ Jelly.KeyRunner = function(object){
 
     this.keyList = KeyMan.parse(object);
     // this.init(object);
-};
-
+})
+.extend(SjEvent)
+.returnFunction();
 
 Jelly.KeyRunner.prototype.init = function(object){
     for (var key in object)
