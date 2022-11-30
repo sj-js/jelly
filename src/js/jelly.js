@@ -7,11 +7,13 @@ try{
     var PopMan = require('@sj-js/popman');
     var MenuMan = require('@sj-js/menuman');
     var KeyMan = require('@sj-js/keyman');
+
+    var WorkItem = require('./model/work-item');
+
     require('@sj-js/keyman/src/js/keyhandler/keyman-keyhandler-shortcut');
     require('@sj-js/keyman/src/js/keyhandler/keyman-keyhandler-command');
     // var VariableMan = require('@sj-js/variableman');
 
-    var WorkItem = require('./model/work-item');
 
     var ready = crossman.ready,
         getClazz = crossman.getClazz,
